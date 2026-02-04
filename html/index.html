@@ -1,0 +1,491 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Happy 18th Birthday</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Fraunces:wght@300;500;700&family=Kalam:wght@300;400;700&display=swap"
+      rel="stylesheet"
+    />
+    <style>
+      :root {
+        --ink: #0f0b1f;
+        --rose: #ff4fd8;
+        --peach: #ffd1f3;
+        --gold: #fff08a;
+        --sky: #7bffef;
+        --deep: #2b185c;
+        --lime: #b7ff4a;
+        --violet: #7c3cff;
+      }
+
+      * {
+        box-sizing: border-box;
+      }
+
+      body {
+        margin: 0;
+        min-height: 100vh;
+        color: #fff;
+        font-family: "Fraunces", serif;
+        background:
+          radial-gradient(circle at 10% 15%, rgba(255, 255, 255, 0.45), transparent 40%),
+          radial-gradient(circle at 80% 15%, rgba(255, 240, 138, 0.55), transparent 35%),
+          radial-gradient(circle at 70% 85%, rgba(255, 79, 216, 0.45), transparent 45%),
+          linear-gradient(135deg, #20064a, #5320a9 50%, #150438);
+        overflow-x: hidden;
+        animation: discoBg 8s linear infinite;
+      }
+
+      .stage {
+        position: relative;
+        min-height: 100vh;
+        padding: 6vh 6vw 8vh;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        text-align: center;
+      }
+
+      .glass {
+        background: rgba(18, 8, 35, 0.65);
+        border: 1px solid rgba(255, 255, 255, 0.25);
+        border-radius: 32px;
+        padding: clamp(24px, 5vw, 52px);
+        backdrop-filter: blur(16px);
+        box-shadow: 0 20px 70px rgba(255, 79, 216, 0.35);
+        max-width: 920px;
+        animation: neonPulse 2.4s infinite alternate;
+      }
+
+      h1 {
+        font-weight: 700;
+        letter-spacing: 0.03em;
+        margin: 0 0 12px;
+        font-size: clamp(2.4rem, 5vw, 4.3rem);
+        text-shadow: 0 0 14px rgba(255, 240, 138, 0.6), 0 0 34px rgba(255, 79, 216, 0.5);
+        animation: titleFlash 3s infinite;
+      }
+
+      h1 span {
+        display: inline-block;
+        color: var(--sky);
+        text-shadow: 0 0 20px rgba(123, 255, 239, 0.7);
+      }
+
+      .subtitle {
+        margin: 0 0 28px;
+        font-family: "Kalam", cursive;
+        font-size: clamp(1.1rem, 2.2vw, 1.5rem);
+        color: rgba(255, 255, 255, 0.9);
+        text-shadow: 0 0 12px rgba(255, 255, 255, 0.35);
+      }
+
+      .message {
+        font-size: clamp(1rem, 2vw, 1.25rem);
+        line-height: 1.7;
+        margin: 22px auto 0;
+        color: rgba(255, 255, 255, 0.88);
+        max-width: 620px;
+      }
+
+      .slideshow {
+        margin: 32px auto 0;
+        width: min(560px, 85vw);
+        aspect-ratio: 4 / 5;
+        border-radius: 28px;
+        position: relative;
+        overflow: hidden;
+        border: 2px solid rgba(255, 255, 255, 0.35);
+        box-shadow: 0 20px 60px rgba(255, 79, 216, 0.5);
+        animation: glow 2.6s ease-in-out infinite;
+      }
+
+      .slideshow img {
+        position: absolute;
+        inset: 0;
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        opacity: 0;
+        transform: scale(1.05);
+        transition: opacity 0.8s ease, transform 0.8s ease;
+        filter: saturate(1.25) brightness(1.1) contrast(1.05);
+      }
+
+      .slideshow img.active {
+        opacity: 1;
+        transform: scale(1);
+      }
+
+      .flash {
+        position: absolute;
+        inset: 0;
+        background: radial-gradient(circle, rgba(255, 255, 255, 0.7), rgba(255, 79, 216, 0.2));
+        opacity: 0;
+        pointer-events: none;
+      }
+
+      .flash.blink {
+        animation: blink 0.6s ease;
+      }
+
+      .hearts {
+        position: absolute;
+        inset: 0;
+        pointer-events: none;
+        overflow: hidden;
+      }
+
+      .heart {
+        position: absolute;
+        width: 20px;
+        height: 20px;
+        background: var(--rose);
+        transform: rotate(45deg);
+        border-radius: 6px;
+        opacity: 0.85;
+        animation: float 12s infinite ease-in-out;
+        box-shadow: 0 0 16px rgba(255, 95, 162, 0.6);
+      }
+
+      .heart::before,
+      .heart::after {
+        content: "";
+        position: absolute;
+        width: 20px;
+        height: 20px;
+        background: var(--rose);
+        border-radius: 50%;
+      }
+
+      .heart::before {
+        top: -10px;
+        left: 0;
+      }
+
+      .heart::after {
+        left: -10px;
+        top: 0;
+      }
+
+      .heart:nth-child(2) {
+        left: 8%;
+        top: 10%;
+        animation-delay: -2s;
+        transform: rotate(45deg) scale(0.8);
+      }
+
+      .heart:nth-child(3) {
+        left: 80%;
+        top: 20%;
+        animation-delay: -6s;
+        transform: rotate(45deg) scale(1.1);
+      }
+
+      .heart:nth-child(4) {
+        left: 15%;
+        top: 75%;
+        animation-delay: -4s;
+        transform: rotate(45deg) scale(1);
+      }
+
+      .heart:nth-child(5) {
+        left: 70%;
+        top: 70%;
+        animation-delay: -8s;
+        transform: rotate(45deg) scale(0.9);
+      }
+
+      .heart:nth-child(6) {
+        left: 50%;
+        top: 5%;
+        animation-delay: -10s;
+        transform: rotate(45deg) scale(0.7);
+      }
+
+      @keyframes float {
+        0% {
+          transform: translateY(0) rotate(45deg);
+        }
+        50% {
+          transform: translateY(-40px) rotate(45deg);
+        }
+        100% {
+          transform: translateY(0) rotate(45deg);
+        }
+      }
+
+      canvas {
+        position: absolute;
+        inset: 0;
+        width: 100%;
+        height: 100%;
+        pointer-events: none;
+      }
+
+      .sparkle {
+        position: absolute;
+        width: 9px;
+        height: 9px;
+        border-radius: 50%;
+        background: rgba(255, 255, 255, 0.9);
+        animation: twinkle 3s infinite ease-in-out;
+        box-shadow: 0 0 18px rgba(123, 255, 239, 0.8);
+      }
+
+      .sparkle:nth-child(1) {
+        left: 12%;
+        top: 30%;
+        animation-delay: -1s;
+      }
+
+      .sparkle:nth-child(2) {
+        left: 65%;
+        top: 15%;
+        animation-delay: -2s;
+      }
+
+      .sparkle:nth-child(3) {
+        left: 80%;
+        top: 65%;
+        animation-delay: -0.5s;
+      }
+
+      .sparkle:nth-child(4) {
+        left: 30%;
+        top: 78%;
+        animation-delay: -1.5s;
+      }
+
+      @keyframes twinkle {
+        0%,
+        100% {
+          opacity: 0.4;
+          transform: scale(0.7);
+        }
+        50% {
+          opacity: 1;
+          transform: scale(1.1);
+        }
+      }
+
+      @keyframes glow {
+        0%,
+        100% {
+          box-shadow: 0 20px 60px rgba(255, 79, 216, 0.55);
+        }
+        50% {
+          box-shadow: 0 25px 90px rgba(123, 255, 239, 0.7);
+        }
+      }
+
+      @keyframes blink {
+        0% {
+          opacity: 0;
+        }
+        50% {
+          opacity: 1;
+        }
+        100% {
+          opacity: 0;
+        }
+      }
+
+      @keyframes neonPulse {
+        0% {
+          box-shadow: 0 0 18px rgba(255, 79, 216, 0.45),
+            0 0 40px rgba(123, 255, 239, 0.25);
+          border-color: rgba(255, 255, 255, 0.2);
+        }
+        50% {
+          box-shadow: 0 0 28px rgba(255, 240, 138, 0.55),
+            0 0 70px rgba(124, 60, 255, 0.35);
+          border-color: rgba(255, 255, 255, 0.35);
+        }
+        100% {
+          box-shadow: 0 0 18px rgba(123, 255, 239, 0.45),
+            0 0 60px rgba(183, 255, 74, 0.3);
+          border-color: rgba(255, 255, 255, 0.25);
+        }
+      }
+
+      @keyframes titleFlash {
+        0% {
+          text-shadow: 0 0 12px rgba(255, 240, 138, 0.6),
+            0 0 34px rgba(255, 79, 216, 0.5);
+        }
+        33% {
+          text-shadow: 0 0 14px rgba(123, 255, 239, 0.7),
+            0 0 40px rgba(124, 60, 255, 0.6);
+        }
+        66% {
+          text-shadow: 0 0 16px rgba(183, 255, 74, 0.7),
+            0 0 46px rgba(255, 79, 216, 0.6);
+        }
+        100% {
+          text-shadow: 0 0 12px rgba(255, 240, 138, 0.6),
+            0 0 34px rgba(255, 79, 216, 0.5);
+        }
+      }
+
+      @keyframes discoBg {
+        0% {
+          filter: hue-rotate(0deg);
+        }
+        50% {
+          filter: hue-rotate(40deg);
+        }
+        100% {
+          filter: hue-rotate(0deg);
+        }
+      }
+
+      @media (max-width: 600px) {
+        .glass {
+          padding: 28px;
+        }
+        .slideshow {
+          aspect-ratio: 3 / 4;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <canvas id="fireworks"></canvas>
+    <audio id="birthdaySong" autoplay loop preload="auto">
+      <source src="../items/Kool The Gang - Celebration (Lyrics).m4a" type="audio/mp4" />
+    </audio>
+    <div class="hearts">
+      <div class="heart"></div>
+      <div class="heart"></div>
+      <div class="heart"></div>
+      <div class="heart"></div>
+      <div class="heart"></div>
+      <div class="heart"></div>
+    </div>
+    <div class="sparkle"></div>
+    <div class="sparkle"></div>
+    <div class="sparkle"></div>
+    <div class="sparkle"></div>
+
+    <main class="stage">
+      <section class="glass">
+        <h1>Happy Birthday, <span>Amor</span>!</h1>
+        <p class="subtitle">To the girl that stole my heart.</p>
+        <p class="message">
+          You are the best person I've ever known, and today is truly the best day of the year. Simply because it's your day.
+          Know you are loved, know you are cared for and don't forget that you'll forever be special to me.
+        </p>
+        <div class="slideshow" aria-label="Amor photo slideshow">
+          <img src="../items/photo_2026-02-04_00-07-11.jpg" alt="Amor photo 1" class="active" />
+          <img src="../items/photo_2026-02-04_00-07-19.jpg" alt="Amor photo 2" />
+          <img src="../items/photo_2026-02-04_00-07-23.jpg" alt="Amor photo 3" />
+          <img src="../items/photo_2026-02-04_00-07-26.jpg" alt="Amor photo 4" />
+          <img src="../items/photo_2026-02-04_00-07-28.jpg" alt="Amor photo 5" />
+          <div class="flash" aria-hidden="true"></div>
+        </div>
+      </section>
+    </main>
+
+    <script>
+      const canvas = document.getElementById("fireworks");
+      const ctx = canvas.getContext("2d");
+      let width;
+      let height;
+      const particles = [];
+
+      function resize() {
+        width = canvas.width = window.innerWidth;
+        height = canvas.height = window.innerHeight;
+      }
+
+      window.addEventListener("resize", resize);
+      resize();
+
+      function spawnFirework() {
+        const x = Math.random() * width * 0.8 + width * 0.1;
+        const y = Math.random() * height * 0.5 + height * 0.1;
+        const hue = Math.floor(Math.random() * 360);
+        const count = 70 + Math.floor(Math.random() * 40);
+
+        for (let i = 0; i < count; i += 1) {
+          const angle = (Math.PI * 2 * i) / count;
+          const speed = 2 + Math.random() * 3.5;
+          particles.push({
+            x,
+            y,
+            vx: Math.cos(angle) * speed,
+            vy: Math.sin(angle) * speed,
+            life: 70 + Math.random() * 40,
+            hue,
+          });
+        }
+      }
+
+      function update() {
+        ctx.globalCompositeOperation = "source-over";
+        ctx.fillStyle = "rgba(10, 4, 24, 0.2)";
+        ctx.fillRect(0, 0, width, height);
+        ctx.globalCompositeOperation = "lighter";
+
+        for (let i = particles.length - 1; i >= 0; i -= 1) {
+          const p = particles[i];
+          p.x += p.vx;
+          p.y += p.vy;
+          p.vy += 0.015;
+          p.life -= 1;
+
+          if (p.life <= 0) {
+            particles.splice(i, 1);
+            continue;
+          }
+
+          ctx.beginPath();
+          ctx.fillStyle = `hsla(${p.hue}, 95%, 72%, ${p.life / 110})`;
+          ctx.shadowColor = `hsla(${p.hue}, 95%, 70%, 0.9)`;
+          ctx.shadowBlur = 12;
+          ctx.arc(p.x, p.y, 2.8, 0, Math.PI * 2);
+          ctx.fill();
+        }
+
+        if (Math.random() < 0.08) {
+          spawnFirework();
+        }
+
+        requestAnimationFrame(update);
+      }
+
+      const images = Array.from(document.querySelectorAll(".slideshow img"));
+      const flash = document.querySelector(".flash");
+      let slideIndex = 0;
+
+      function showNextSlide() {
+        images[slideIndex].classList.remove("active");
+        slideIndex = (slideIndex + 1) % images.length;
+        images[slideIndex].classList.add("active");
+        flash.classList.remove("blink");
+        void flash.offsetWidth;
+        flash.classList.add("blink");
+      }
+
+      setInterval(showNextSlide, 2400);
+
+      const song = document.getElementById("birthdaySong");
+      function tryPlaySong() {
+        if (song) {
+          song.play().catch(() => {});
+        }
+      }
+
+      window.addEventListener("load", tryPlaySong);
+      window.addEventListener("click", tryPlaySong, { once: true });
+
+      spawnFirework();
+      update();
+    </script>
+  </body>
+</html>
