@@ -10,6 +10,12 @@
       href="https://fonts.googleapis.com/css2?family=Fraunces:wght@300;500;700&family=Kalam:wght@300;400;700&display=swap"
       rel="stylesheet"
     />
+    <link
+      rel="preload"
+      as="audio"
+      href="items/Kool The Gang - Celebration (Lyrics).m4a"
+      type="audio/mp4"
+    />
     <style>
       :root {
         --ink: #0f0b1f;
@@ -261,6 +267,36 @@
         animation-delay: -1.5s;
       }
 
+      .audio-cta {
+        position: fixed;
+        right: 18px;
+        bottom: 18px;
+        z-index: 10;
+        padding: 12px 18px;
+        border-radius: 999px;
+        border: 1px solid rgba(255, 255, 255, 0.35);
+        background: rgba(10, 6, 24, 0.75);
+        color: #fff;
+        font-family: "Kalam", cursive;
+        font-size: 1rem;
+        letter-spacing: 0.02em;
+        cursor: pointer;
+        box-shadow: 0 12px 30px rgba(255, 79, 216, 0.4);
+        backdrop-filter: blur(10px);
+        transition: transform 0.2s ease, box-shadow 0.2s ease;
+      }
+
+      .audio-cta:hover {
+        transform: translateY(-2px) scale(1.02);
+        box-shadow: 0 16px 40px rgba(123, 255, 239, 0.45);
+      }
+
+      .audio-cta.hidden {
+        opacity: 0;
+        pointer-events: none;
+        transform: translateY(10px);
+      }
+
       @keyframes twinkle {
         0%,
         100% {
@@ -356,9 +392,10 @@
   </head>
   <body>
     <canvas id="fireworks"></canvas>
-    <audio id="birthdaySong" autoplay loop preload="auto">
+    <audio id="birthdaySong" preload="auto" loop playsinline>
       <source src="items/Kool The Gang - Celebration (Lyrics).m4a" type="audio/mp4" />
     </audio>
+    <button class="audio-cta" id="playButton" type="button">Tap to play music</button>
     <div class="hearts">
       <div class="heart"></div>
       <div class="heart"></div>
@@ -475,14 +512,23 @@
       setInterval(showNextSlide, 2400);
 
       const song = document.getElementById("birthdaySong");
+      const playButton = document.getElementById("playButton");
+
       function tryPlaySong() {
         if (song) {
-          song.play().catch(() => {});
+          song.play().then(() => {
+            if (playButton) {
+              playButton.classList.add("hidden");
+            }
+          }).catch(() => {});
         }
       }
 
       window.addEventListener("load", tryPlaySong);
       window.addEventListener("click", tryPlaySong, { once: true });
+      if (playButton) {
+        playButton.addEventListener("click", tryPlaySong);
+      }
 
       spawnFirework();
       update();
